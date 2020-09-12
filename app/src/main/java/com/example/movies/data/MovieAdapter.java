@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.movies.R;
 import com.example.movies.model.Movie;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
@@ -44,6 +46,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
         Movie currentMovie = movies.get(i);
+
+        String title = currentMovie.getTitle();
+        String year = currentMovie.getYear();
+        String posterUrl = currentMovie.getPosterUrl();
+
+        movieViewHolder.titleTextView.setText(title);
+        movieViewHolder.yearTextView.setText(year);
+        Picasso.with(context).load(posterUrl).fit().centerInside()
+                .into(movieViewHolder.posterImageView);
     }
 
     @Override

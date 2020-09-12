@@ -1,15 +1,14 @@
 package com.example.movies.model;
 
-import java.io.Serializable;
-import java.util.Set;
-
 public class Movie {
     private String title;
     private String posterUrl;
     private String year;
+    private String director;
+    private String plot;
+    private String runtime;
 
-    public Movie(String title) {
-        this.title = title;
+    public Movie() {
     }
 
     public String getTitle() {
@@ -34,5 +33,29 @@ public class Movie {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getPlot() {
+        return plot;
+    }
+
+    public void setPlot(String plot) {
+        this.plot = plot;
+    }
+
+    public String getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
     }
 }
