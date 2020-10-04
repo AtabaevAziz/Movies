@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -23,14 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.OnItemClickListener {
-
-    public static final String KEY_TITLE = "title";
-    public static final String KEY_POSTER_URL = "posterUrl";
-    public static final String KEY_YEAR = "year";
-    public static final String KEY_DIRECTOR = "director";
-    public static final String KEY_PLOT = "plot";
-    public static final String KEY_RUNTIME = "runtime";
+public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
@@ -54,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
 
     private void getMovies() {
 
-        String url = "http://www.omdbapi.com/?apikey=3b8a83ef&s=superman";
+        String url = "https://omdbapi.com/?apikey=1b1d6c73&s=terminator";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 url, null, new Response.Listener<JSONObject>() {
@@ -75,14 +67,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
                         movie.setYear(year);
                         movie.setPosterUrl(posterUrl);
 
-
                         movies.add(movie);
                     }
 
                     movieAdapter = new MovieAdapter(MainActivity.this,
                             movies);
-
-                    movieAdapter.setOnItemClickListener(MainActivity.this);
                     recyclerView.setAdapter(movieAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -97,23 +86,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
 
         requestQueue.add(request);
 
-    }
-
-    @Override
-    public void onItemClick(int position) {
-        Intent intent = new Intent(MainActivity.this,
-                DetailActivity.class);
-        Movie clickedMovie = movies.get(position);
-
-        intent.putExtra(KEY_TITLE, clickedMovie.getTitle());
-        intent.putExtra(KEY_POSTER_URL, clickedMovie.getPosterUrl());
-        intent.putExtra(KEY_YEAR, clickedMovie.getYear());
-        intent.putExtra(KEY_DIRECTOR, clickedMovie.getDirector());
-        intent.putExtra(KEY_PLOT, clickedMovie.getPlot());
-        intent.putExtra(KEY_RUNTIME, clickedMovie.getRuntime());
-
-
-        startActivity(intent);
 
     }
 }
